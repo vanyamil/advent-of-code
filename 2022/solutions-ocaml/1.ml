@@ -1,3 +1,17 @@
+(*
+	Year: 2022
+	Day: 1
+	Name: Calorie Counting
+*)
+
+(* Header *)
+
+#use "shared/utilities.ml" ;;
+
+let input_file = file_to_line_list "2022/inputs/1.txt" ;;
+
+(* Main file *)
+
 let rec sums file_lines cur_acc total_acc =
 	if file_lines = []
 	then cur_acc :: total_acc
@@ -10,8 +24,8 @@ let rec sums file_lines cur_acc total_acc =
 	sums t (v + cur_acc) total_acc
 ;;
 
-let part1 file_lines = 
-	sums file_lines 0 []
+let part1 = 
+	sums input_file 0 []
 	|> List.fold_left max 0
 ;;
 
@@ -22,10 +36,14 @@ let rec sublist n acc l =
 	| [] -> List.rev acc
 	| h :: t -> sublist (n - 1) (h :: acc) t
 
-let part2 file_lines =
-	sums file_lines 0 []
+let part2 =
+	sums input_file 0 []
 	|> List.sort compare
 	|> List.rev
 	|> sublist 3 []
 	|> List.fold_left (+) 0
 ;;
+
+(* Final print *)
+
+print_results part1 part2 ;;

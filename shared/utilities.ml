@@ -1,5 +1,4 @@
-let square x = x * x;;
-
+(* Lazy loading a file into a sequence of lines *)
 let file_to_line_seq filename : string Seq.t = 
 	let unfold_fn ic =
 		try
@@ -11,15 +10,27 @@ let file_to_line_seq filename : string Seq.t =
 			in
 			Some (line, ic)
 		with
-		| End_of_file -> None
+		| End_of_file -> (close_in ic; None)
 	in
 	open_in filename
 	|> Seq.unfold unfold_fn
 	|> Seq.memoize
 ;;
 
+(* Loading a file into a list of lines, not lazy *)
 let file_to_line_list filename = 
 	filename
 	|> file_to_line_seq 
 	|> List.of_seq
+;;
+
+(* Print the results and exit *)
+let print_results part1 part2 =
+	print_string "Part 1: ";
+	print_int part1;
+	print_newline ();
+	print_string "Part 2: ";
+	print_int part2;
+	print_newline ();
+	exit 0;
 ;;
