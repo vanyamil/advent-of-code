@@ -1,7 +1,7 @@
 (*
 	Year: 2022
 	Day: 4
-	Name: 
+	Name: Camp Cleanup
 *)
 
 (* Header *)
@@ -51,4 +51,4 @@ let part2 =
 
 (* Final print *)
 
-print_results part1 part2 ;;
+print_results (string_of_int part1) (string_of_int part2) ;;

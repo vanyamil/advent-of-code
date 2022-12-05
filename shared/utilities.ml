@@ -27,10 +27,8 @@ let file_to_line_list filename =
 (* Print the results and exit *)
 let print_results part1 part2 =
 	print_string "Part 1: ";
-	print_int part1;
-	print_newline ();
+	print_endline part1;
 	print_string "Part 2: ";
-	print_int part2;
-	print_newline ();
+	print_endline part2;
 	exit 0;
 ;;
