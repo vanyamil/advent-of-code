@@ -32,3 +32,41 @@ let print_results part1 part2 =
 	print_endline part2;
 	exit 0;
 ;;
+
+module V = 
+struct
+	type t = int * int
+
+	let compare (a: t) (b: t) = Stdlib.compare a b
+
+	let add (x0, y0: t) (x1, y1: t): t = (x0 + x1, y0 + y1)
+
+	let manhattan (x0, y0) (x1, y1) = 
+		abs (x1 - x0) + abs (y1 - y0)
+
+	let within (x, y) (l, t) (r, b) = 
+		x >= l && x < r && y >= t && y < b
+
+	let to_list (x, y) = [x; y]
+
+	let from_list: int list -> t = function
+		| [x; y] -> (x, y)
+		| _ -> failwith "List should have two elements!"
+
+	let unit_dist (x0, y0) (x1, y1): t =
+		let dx = x1 - x0 in
+		let dy = y1 - y0 in
+		let ux = 
+			if dx = 0
+			then 0
+			else dx / (abs dx)
+		in
+		let uy = 
+			if dy = 0
+			then 0
+			else dy / (abs dy)
+		in
+		(ux, uy)
+end
+
+module VSet = Set.Make (V)
