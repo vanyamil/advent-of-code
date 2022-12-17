@@ -66,8 +66,7 @@ let part1 =
 	let infos = Seq.map line_to_info input_file in
 	let y = 2000000 in
 	let beacons_at_y = infos |> Seq.fold_left (count_beacons_at_y y) (0, []) |> fst in
-	input_file
-	|> Seq.map line_to_info
+	infos
 	|> Seq.filter_map (coverup y)
 	|> Seq.fold_left fold_segments []
 	|> List.fold_left count_dist (~- beacons_at_y)
